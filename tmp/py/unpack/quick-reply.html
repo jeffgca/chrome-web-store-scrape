@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Quick-Reply</title>
+        <link rel="stylesheet" type="text/css" href="base.css">
+        <script src="utils.js"></script>
+        <script src="text.js"></script>
+        <script src="page.js"></script>
+        <script src="quick-reply.js"></script>
+        <style>
+            ::-webkit-scrollbar { 
+                display: none; 
+            }
+            #header {
+                padding: 15px;
+                color: white;
+            }
+            #title {
+                font-size: 19px;
+                margin: 7px 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            #desc {
+                opacity: 0.5;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            #message {
+                background-color: #ecf0f0;
+                padding: 15px;
+                white-space: pre-wrap;
+                min-height: 120px;
+                max-height: 180px;
+                overflow: scroll;
+            }
+            #reply {
+                padding: 15px;
+                height: 100px;
+                border: none;
+                resize: none;
+                outline: none;
+                display: block;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="image-holder" style="float:left;background-color:white;border-radius:34px;padding:2px;">
+                    <img id="image" style="display:block;height:64px;width:64px;border-radius:32px;">
+                </div>
+                <div style="margin:12px 0 0 90px;">
+                    <div id="title"></div>
+                    <div id="desc"></div>
+                </div>
+            </div>
+            <div id="reply-form">
+                <div id="message"></div>
+                <textarea id="reply" style="" placeholder="Type a reply, then press enter" autofocus></textarea>
+                <div style="padding:15px;" id="sms-counter">
+                    <span id="sms-length">0/160</span> <a id="sms-warning-link" href="#"><span id="sms-warning" style="display:none;"></span></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

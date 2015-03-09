@@ -1,0 +1,20 @@
+{
+  "name": "chrome-scrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^0.9.0",
+    "cheerio": "^0.18.0",
+    "firefox-client": "^0.3.0",
+    "phantom": "^0.7.2",
+    "request": "^2.53.0",
+    "to-csv": "0.0.3",
+    "underscore": "^1.8.2"
+  }
+}

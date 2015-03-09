@@ -1,0 +1,69 @@
+.picker {
+    position: absolute;
+    display: none;
+    z-index: 200;
+    max-height: 174px;
+    width: 300px;
+    background-color: #ecf0f0;
+    margin-left: 20px;
+    overflow:auto;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .25);
+}
+.picker-overlay {
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+    left: 0px;
+    top: 0px;
+    z-index:100;
+    width: 100%;
+    color: #232a2a;
+    font-size: 14px;
+    background-color: white;
+}
+.picker-overlay:hover {
+    background-color: #ecf0f0;
+}
+.picker-overlay .picker-option {
+    padding: 0 15px 0 0;
+    height: 30px;
+    margin: 9px 15px;
+    background-color: #ecf0f0;
+    border-radius: 15px;
+    float: left;
+}
+.firefox .picker-overlay .picker-option {
+    min-width: 150px;
+}
+.picker-overlay:hover .picker-option {
+     background-color: #ced1d5;
+}
+.picker-option {
+    cursor: pointer;
+    line-height: 30px;
+    padding: 10px;
+}
+.picker-option:hover {
+    background-color: #ced1d5;
+}
+.picker-option.selected {
+    background-color: #ced1d5;
+}
+.picker-target-image {
+    float: left;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: -5px;
+}
+.picker-target-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    padding-left: 15px;
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pushbullet</title>
+        <link rel="stylesheet" type="text/css" href="base.css">
+        <link rel="stylesheet" type="text/css" href="picker.css">
+        <link rel="stylesheet" type="text/css" href="notifications.css">
+        <style>
+            html {
+                background-color: white;
+            }
+            body {
+                min-width: 420px;
+            }
+            body:not(.signed-in) .signed-in {
+                display: none;
+            }
+            body:not(.not-signed-in) .not-signed-in {
+                display: none;
+            }
+            body:not(.firefox) .firefox {
+                display: none;
+            }
+            body:not(.not-firefox) .not-firefox {
+                display: none;
+            }
+            body:not(.chrome) .chrome {
+                display: none;
+            }
+            body:not(.not-chrome) .not-chrome {
+                display: none;
+            }
+            body:not(.safari) .safari {
+                display: none;
+            }
+            body:not(.not-safari) .not-safari {
+                display: none;
+            }
+            body:not(.popout) .popout {
+                display: none;
+            }
+            body:not(.not-popout) .not-popout {
+                display: none;
+            }
+            textarea {
+                overflow-y:scroll;
+            }
+            #logo {
+                background-size: 190px 36px;
+                width: 190px;
+                height: 36px;
+            }
+            #settings-gear {
+                cursor: pointer;
+                transition: background-color .3s ease;
+            }
+            #settings-gear:hover {
+                background-color: #4ab367;
+            }
+            #settings-menu {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                width: 150px;
+                z-index: 400;
+                color:#34495e;
+                background-color: #ecf0f0;
+                border-radius: 2px;
+                overflow: hidden;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, .25);
+            }
+            .settings-option {
+                cursor: pointer;
+                line-height: 36px;
+                padding: 0px 10px;
+                font-size: 13px;
+            }
+            .settings-option:hover {
+                background-color: #ced1d5;
+            }
+            #menu-sink {
+                position:absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: transparent;
+                z-index: 300;
+            }
+            #notifications-tab {
+                max-width: 200px;
+            }
+            .tab {
+                max-width: 100px;
+            }
+            .push-type {
+                float: left;
+                cursor: pointer;
+                min-width: 65px;
+                max-width: 75px;
+                text-align: center;
+                line-height: 36px;
+                margin-right: 10px;
+                padding: 0px 5px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                transition: background-color .3s ease;
+            }
+            .push-type.selected {
+                color: #147674;
+                border-bottom: 2px solid #147674;
+            }
+            .push-type:hover {
+                background-color: #ecf0f0
+            }
+            .type-icon {
+                margin-left: -2px;
+                margin-right: 3px;
+            }
+            #note-icon {
+                height: 20px;
+                width: 20px;
+            }
+            #link-icon {
+                height: 20px;
+                width: 20px;
+            }
+            #file-icon {
+                height: 20px;
+                width: 20px;
+            }
+            #file-holder {
+                height: 188px;
+                line-height: 188px;
+                cursor: pointer;
+                text-align: center;
+                color: #95a5a6;
+                border-bottom: 1px solid #ecf0f0;
+            }
+            #img-preview {
+                position: relative;
+                top: -188px;
+                max-height: 188px;
+                max-width: 100%;
+                display: block;
+                margin: auto;
+                z-index: -1;
+                opacity: 0.2;
+            }
+            #pop-out:hover {
+                background-color: #ecf0f0;
+            }
+            #notifications-holder {
+                padding: 15px;
+                max-height: 500px;
+                overflow-y: scroll;
+                min-height: 220px;
+            }
+            #notifications-holder::-webkit-scrollbar {
+                display: none;
+            }
+            #notifications-holder.empty.desktop-app.mac {
+                background-image: url(bg_apple.png);
+                background-size: 140px;
+            }
+            #notifications-holder.empty.desktop-app.windows {
+                background-image: url(bg_windows.png);
+                background-size: 140px 140px;
+            }
+            #notifications-holder.empty {
+                background-image: url(bg_sam.png);
+                background-size: 248px 186px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            #sms-warning {
+                font-size: 12px;
+                font-weight: bold;
+            }
+        </style>
+        <script src="utils.js"></script>
+        <script src="text.js"></script>
+        <script src="page.js"></script>
+        <script src="picker.js"></script>
+        <script src="panel.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="menu-sink" style="display:none;"></div>
+            <div style="overflow:hidden;margin-bottom:10px;">
+                <a id="logo-link" style="float:left;display:block;">
+                    <div id="logo"></div>
+                </a>
+                <div class="not-signed-in" style="float:right;">
+                    <a id="sign-in" style="color:white;font-weight:bold;cursor:pointer;"></a>
+                </div>
+                <div id="settings-gear" class="signed-in" style="float:right;padding:8px;">
+                    <img src="settings.png" height="20" width="20">
+                </div>
+                <div id="settings-menu" style="display:none;">
+                    <div id="snooze" class="settings-option not-firefox">
+                    </div>
+                    <div id="options" class="settings-option not-safari">
+                    </div>
+                    <div id="sign-out" class="settings-option">
+                    </div>
+                </div>
+            </div>
+            <div id="tabs" class="signed-in">
+                <div id="push-tab" class="tab selected"></div>
+                <div id="sms-tab" class="tab" style="display:none;"></div>
+                <div id="notifications-tab" class="tab"></div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="tab-content" class="signed-in">
+                <div id="push-tab-content" style="display:none;">
+                    <div style="position:relative;">
+                        <input id="push-target" type="text">
+                        <div id="push-picker" class="picker"></div>
+                        <div id="push-picker-overlay" class="picker-overlay"></div>
+                    </div>
+                    <input id="title" type="text">
+                    <input id="url" type="text">
+                    <textarea id="body" style="height:90px;resize:vertical;"></textarea>
+                    <div id="file-holder">
+                        <input id="file-input" type="file" class="popout" style="position:relative;opacity:0;display:none;">
+                        <div id="file-input-label" class="popout"></div>
+                        <div id="pop-out" class="not-popout" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"></div>
+                    </div>
+                    <div style="overflow:hidden;margin:15px;color:#95a5a6;">
+                        <div style="float:right;overflow:hidden;">
+                            <button id="push-send" style="max-width:125px;" tabindex="1"></button>
+                        </div>
+                        <div style="margin-right:115px;overflow:hidden;">
+                            <div id="type-note" class="push-type">
+                                <i class="type-icon pushfont-message"></i> <span id="note-label"></span>
+                            </div>
+                            <div id="type-link" class="push-type">
+                                <i class="type-icon pushfont-link"></i> <span id="link-label"></span>
+                            </div>
+                            <div id="type-file" class="push-type">
+                                <i class="type-icon pushfont-file"></i> <span id="file-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sms-tab-content" style="display:none;">
+                    <div style="position:relative;">
+                        <input id="sms-device" type="text" tabindex="4">
+                        <div id="sms-device-picker" class="picker"></div>
+                        <div id="sms-device-picker-overlay" class="picker-overlay"></div>
+                    </div>
+                    <div style="position:relative;">
+                        <input id="sms-recipient" type="text" tabindex="5">
+                        <div id="sms-recipient-picker" class="picker"></div>
+                        <div id="sms-recipient-picker-overlay" class="picker-overlay"></div>
+                    </div>
+                    <textarea id="sms-message" style="height:106px;resize:vertical;" tabindex="2"></textarea>
+                    <div style="margin:15px;">
+                        <span id="sms-length">0/160</span> <a id="sms-warning-link" href="#"><span id="sms-warning" style="display:none;"></span></a>
+                    </div>
+                    <div style="overflow:hidden;margin:15px;">
+                        <div style="float:right;overflow:hidden;">
+                            <button id="sms-send" style="max-width:115px;" tabindex="3"></button>
+                        </div>
+                        <div id="sms-disclaimer" style="margin-right:120px;font-size:12px;color:#95a5a6"></div>
+                    </div>
+                </div>
+                <div id="notifications-tab-content" style="background-color:#ecf0f0;min-height:305px;display:none;">
+                    <div id="notifications-holder"></div>
+                    <div id="notifications-holder-text" style="margin-top:-10px;padding:0 20px;text-align:center;color:#95a5a6;"></div>
+                </div>
+            </div>
+            <div class="not-signed-in" style="padding:20px;">
+                <p id='pushbullet-desc' style="font-size:16px;"></p>
+                <div style="text-align:center;margin:20px 0;">
+                    <button id="sign-up"></button>
+                </div>
+                <p class="firefox" style="margin-top:30px;">
+                    <span id='cant-sign-in' style="color:#7f8c8c;"></span> <a id="third-party-cookies" href="#"></a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

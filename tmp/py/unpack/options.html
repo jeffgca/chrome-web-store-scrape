@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pushbullet Options</title>
+        <link rel="stylesheet" type="text/css" href="base.css">
+        <link rel="stylesheet" type="text/css" href="big.css">
+        <script src="utils.js"></script>
+        <script src="text.js"></script>
+        <script src="page.js"></script>
+        <script src="options.js"></script>
+        <style>
+            #version {
+                float: right;
+            }
+            #account {
+                float: right;
+                max-width: 180px;
+                position: relative;
+                top: 24px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            #options {
+                margin-bottom: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <div class="inner">
+                <div>
+                    <a id="logo-link" style="display:inline-block;" href="#" target="_blank">
+                        <div id="logo"></div>
+                    </a>
+                    <span id="version"></span>
+                </div>
+                <div id="tabs"></div>
+                <div id="account"></div>
+            </div>
+        </div>
+        <div class="inner">
+            <div id="options"></div>
+        </div>
+        <hr>
+        <div class="inner">
+            <p id="mute-app-question" style="font-weight:bold;"></p>
+            <p id="mute-app-answer"></p>
+        </div>
+        <hr>
+        <div class="inner" style="margin-bottom:80px;">
+            <p>
+                <a href="changelog.html">Changelog</a>
+            </p>
+        </div>
+    </body>
+</html>

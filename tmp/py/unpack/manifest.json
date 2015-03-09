@@ -1,0 +1,102 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+    "manifest_version": 2,
+    "name": "Pushbullet",
+    "short_name": "Pushbullet",
+    "version": "181",
+    "description": "Pushbullet saves you time by moving your notifications, links, and files wherever you go.",
+    "icons": {
+        "16": "icon_16.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png"
+    },
+    "homepage_url": "https://www.pushbullet.com",
+    "minimum_chrome_version": "26",
+    "permissions": [
+        "tabs", "activeTab", "contextMenus", "cookies",
+        "notifications", "idle",
+        "https://*/*", "http://*/*"
+    ],
+    "optional_permissions": [
+        "background", "clipboardRead", "clipboardWrite"
+    ],
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "browser_action": {
+        "default_icon": {
+            "19": "icon_19.png",
+            "38": "icon_38.png"
+        },
+        "default_title": "Pushbullet",
+        "default_popup": "panel.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "content-script.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "scripts": [
+            "utils.js",
+            "pb.js",
+            "http.js",
+            "analytics.js",
+            "text.js",
+            "events.js",
+            "notifier.js",
+            "notifier-chrome.js",
+            "connection.js",
+            "syncables.js",
+            "device.js",
+            "client-check.js",
+            "clipboard.js",
+            "phonebook.js",
+            "pushes.js",
+            "ephemerals.js",
+            "pushing.js",
+            "context-menu.js",
+            "message-passing.js",
+            "keyboard-shortcuts.js",
+            "main.js"
+        ]
+    },
+    "options_page": "options.html",
+    "commands": {
+        "dismiss-most-recent-notification": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+K",
+                "mac": "Command+Shift+K"
+            },
+            "description": "Dismiss the most recent notification"
+        },
+        "instant-push-current-tab": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+X",
+                "mac": "Command+Shift+X"
+            },
+            "description": "Instantly push the current tab (configure in Options)"
+        },
+        "pop-out-panel": {
+            "description": "Pop out the Push panel"
+        }
+    },
+    "web_accessible_resources": [
+        "icon_19.png",
+        "icon_48.png",
+        "ic_action_cancel.png",
+        "ic_action_halt.png",
+        "ic_action_undo.png",
+        "ic_action_sms.png",
+        "ic_action_overflow.png",
+        "ic_action_android.png",
+        "ic_action_tick.png",
+        "alert.ogg"
+    ]
+}

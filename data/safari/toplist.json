@@ -1,0 +1,142 @@
+[
+  {
+    "title": "AdBlock",
+    "desc": "AdBlock banishes all ads on all web pages. Once you install AdBlock, you’ll immediately see the results. Visit your favorite websites and watch as ads disappear.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "Pin It button",
+    "desc": "Pinterest is a tool to find your inspiration and share it with others. Use it to collect things you love, organize and plan important projects, and more.",
+    "cat": "Bookmarking"
+  },
+  {
+    "title": "ClickToFlash",
+    "desc": "ClickToFlash prevents the Flash plug-in from running. It replaces any Flash element on a webpage with a placeholder; simply click the placeholder to load the Flash content. ClickToFlash also lets you replace Flash videos from select websites (such as YouTube) with H.264 video. Other optional features include advanced whitelisting.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "Add to Amazon Wish List",
+    "desc": "Now your Amazon.com Wish List is always accessible. With the official Amazon.com extension, Add to Amazon Wish List, you can add any item from any website to your wish list with one simple click. This makes it easier than ever to keep track of all the items you wish for, all in one place. When you see something you like on a website, just click the Add to Wish List button.",
+    "cat": "Shopping"
+  },
+  {
+    "title": "DuckDuckGo for Safari",
+    "desc": "DuckDuckGo is a search engine. We believe you can get better search and privacy at the same time. This extension makes our instant answers and other features more accessible when you're browsing in Safari. The DuckDuckGo extension adds answers to Google and Bing, and adds a toolbar button for easy access. It also lets you use DuckDuckGo in the Safari search field. Enjoy!",
+    "cat": "Search Tools"
+  },
+  {
+    "title": "New York Times Updates",
+    "desc": "The official New York Times extension provides updates (headlines and thumbnails) based on New York Times RSS feeds. Filter content by section or most emailed or get all the updates from the NYTimes.com home page. You can even choose to omit articles and blog posts you’ve already viewed. The New York Times extension also checks for updates and slides in new headlines and thumbnails.",
+    "cat": "News"
+  },
+  {
+    "title": "My eBay Manager",
+    "desc": "The My eBay Manager extension for Safari helps you keep track of your eBay activity while you browse the web. Built with eBay users in mind, this extension helps you get more from your buying and selling. You’re always securely signed in, so you can check your progress whenever you like.",
+    "cat": "Shopping"
+  },
+  {
+    "title": "Awesome Screenshot",
+    "desc": "Awesome Screenshot lets you capture, annotate, and share screenshots with a click. You can crop, show area dimensions, annotate with shapes and text, and blur your screenshot. You can even choose to capture the entire web page. Then upload your screenshot to share it.",
+    "cat": "Photos"
+  },
+  {
+    "title": "Facebook Cleaner",
+    "desc": "Facebook Cleaner hides visual distractions — like sponsored ads, pokes, and the Get Connected section — from the Facebook website.",
+    "cat": "Social Networking"
+  },
+  {
+    "title": "Facebook Photo Zoom",
+    "desc": "Facebook Photo Zoom is a simple extension that integrates directly into Facebook. Just hover over an image — like a profile picture or a photo in an album — and Facebook Photo Zoom enlarges it for you.",
+    "cat": "Social Networking"
+  },
+  {
+    "title": "clea.nr Videos for YouTube™",
+    "desc": "Now you can watch YouTube videos without all the visual distractions of the website. A Cleaner YouTube transforms YouTube into a clean and tranquil place.",
+    "cat": "Entertainment"
+  },
+  {
+    "title": "Firebug Lite for Safari",
+    "desc": "Firebug is a tool to help you develop and debug HTML, Javascript and CSS. Click on the Firebug Lite for Safari button while you browse, and instantly edit, debug and monitor the web page you are viewing.",
+    "cat": "Developer"
+  },
+  {
+    "title": "Turn Off the Lights",
+    "desc": "This extension dims everything in the background, so you can enjoy the video you’re watching without any distractions.",
+    "cat": "Entertainment"
+  },
+  {
+    "title": "MLB.com Toolbar",
+    "desc": "The MLB.com toolbar gives you up-to-the-moment news on all of the day’s games. Access free, live “look-ins” to key moments from every game — exclusive to MLB.com. Check the pitching match-ups, who’s at bat, and who’s on base as they happen on the field. Use your MLB.TV subscription to watch every out-of-market game live or listen to any radio broadcast. Stay locked on your favorite team’s game or let the toolbar automatically cycle through the live scoreboard.",
+    "cat": "Entertainment"
+  },
+  {
+    "title": "1-Click Weather for Safari",
+    "desc": "Officially brought to you by the Weather Channel, this extension lets you view the current temperature and weather conditions right in your Safari toolbar.",
+    "cat": "News"
+  },
+  {
+    "title": "SafariRestore",
+    "desc": "This extension automatically restores your previous Safari browsing session.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "Adblock Plus",
+    "desc": "Adblock Plus blocks all annoying ads and supports websites by not blocking unobtrusive ads by default (configurable). Enjoy surfing the web without obtrusive ads cluttering your screen! Blocks: Banners, YouTube, video, ads, Facebook advertisements, Pop-ups, and other obtrusive ads.",
+    "cat": "Security"
+  },
+  {
+    "title": "GMail Counter",
+    "desc": "Know instantly how many unread messages are in your Gmail inbox, thanks to a handy button that appears in your Safari toolbar.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "YouTube Wide",
+    "desc": "Enjoy watching your YouTube videos in widescreen? YouTube Wide makes widescreen the default view.",
+    "cat": "Entertainment"
+  },
+  {
+    "title": "Ultimate Status Bar",
+    "desc": "This status bar extension reveals what links are trying to hide from you — destination, file type and size, the possible presence of Rick Astley. It embiggens shortened URLs, and when you don't want it in your way, hides discreetly out of sight. Fully themed, you can make Ultimate Status Bar suit your look. Now available in Sparkly Unicorn Flavor!",
+    "cat": "Productivity"
+  },
+  {
+    "title": "WOT",
+    "desc": "Know which websites you can trust with the Web of Trust (WOT) extension. Powered by a global community, WOT uses ratings based on the experiences of millions of users. Get reputation ratings for search results and keep your personal information safe.",
+    "cat": "Security"
+  },
+  {
+    "title": "Stop/Reload toolbar button",
+    "desc": "This extension is a toolbar button that provides the same functionality as the built-in stop/reload control within the Address Field, but can be placed anywhere in the toolbar.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "Franker",
+    "desc": "Inspired by Ilya Frank’s method of language learning, Franker injects the translation directly into the original text. You can read words or sentences in a foreign language first, then check to see if you understood everything. It’s designed to help you learn new words and phrases in context. Franker can inject translations for an entire web page or just part of it.",
+    "cat": "Translation"
+  },
+  {
+    "title": "ResizeMe",
+    "desc": "This extension adds a toolbar that allows you to resize the Safari window to six different sizes, including full screen. You can also right-click to resize the window.",
+    "cat": "Developer"
+  },
+  {
+    "title": "Facebook Improved",
+    "desc": "This extension replaces fonts on Facebook with Helvetica. It also blocks the Events module and sponsored content, and ensures you always know where you're posting.",
+    "cat": "Social Networking"
+  },
+  {
+    "title": "LastPass",
+    "desc": "LastPass is an online password manager and form filler that makes web browsing easier and more secure.",
+    "cat": "Security"
+  },
+  {
+    "title": "Widgets Bar",
+    "desc": "Widgets Bar is a Safari extension that lets you see the current weather, an RSS ticker, a world clock, and today's date — all in one convenient toolbar.",
+    "cat": "Productivity"
+  },
+  {
+    "title": "Translate",
+    "desc": "Translate adds a toolbar item that translates the current web page using Google Translate.  You can set the target language and translate in place or view the translation in a new browser tab or window.",
+    "cat": "Translation"
+  }
+]

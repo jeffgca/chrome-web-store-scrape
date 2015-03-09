@@ -1,0 +1,89 @@
+.notification {
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333;
+    background-color: white;
+    margin-bottom: 15px;
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.3);
+}
+body:not(.popout) .notification {
+    max-width: 390px;
+}
+.notification-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 28px;
+    width: 28px;
+    padding: 6px;
+    cursor: pointer;
+}
+.notification-close:hover {
+    background-color: #f5f5f5;
+}
+.notification-image-holder {
+    float: left;
+    overflow: hidden;
+}
+.notification-image {
+    display: block;
+    height: 80px;
+    width: 80px;
+    margin: auto;
+}
+.notification-text-holder {
+    overflow: hidden;
+    min-height: 80px;
+    max-height: 139px;
+    margin-left: 98px;
+    margin-right: 25px;
+    padding-bottom: 10px;
+}
+.notification-small {
+    font-size: 13px;
+    line-height: 15px;
+    white-space: pre-wrap;
+}
+.notification-title {
+    padding-top: 8px;
+    max-height: 29px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.notification-message {
+    padding-top: 4px;
+    max-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.notification-context-message {
+    padding-top: 10px;
+    color: #999;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.notification-button {
+    height: 40px;
+    padding: 0 0 0 16px;
+    cursor: default;
+}
+.notification-button:hover {
+    background-color: #f5f5f5;
+}
+.notification-button-icon {
+    float: left;
+    display: inline-block;
+    margin: 12px 16px 12px 0px;
+    height: 16px;
+    width: 16px;
+}
+.notification-button-label {
+    line-height: 40px;
+}
+.notification-bottom-border {
+    border-bottom: 1px solid #eee;
+}
