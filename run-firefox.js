@@ -1,13 +1,13 @@
-var phantom = require('phantom');
 var async = require('async');
 var _ = require('underscore');
 var fs = require('fs');
-// var url = 'https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?id=achiogecogbafnpepmdkfdlmkkpkmfcj';
 var data = JSON.parse(fs.readFileSync('./data/chrome/chrome-partial.json', {encoding: 'utf8'}));
 
 data.length = 1;
 
 function scrape(tab, callback) {
+  var id = tab.url.split('/').pop();
+
   async.parallel([
     function(callback) {
       tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-i', function(err, result) {
@@ -39,7 +39,8 @@ function scrape(tab, callback) {
       var _results = {
         category: result[0],
         users: result[1],
-        updates: resp.result
+        updates: resp.result,
+        id: id
       };
       callback(null, _results);
     });
@@ -78,6 +79,7 @@ if (!module.parent) {
 
       tab.attach(function() {
         var tasks = _.map(data, function(item) {
+          console.log(item);
           return function(callback) {
             tab.navigateTo(item.url, function() {
               console.log("navigated to", item.url);
@@ -92,15 +94,22 @@ if (!module.parent) {
           setTimeout(function() {
             scrape(tab, function(err, results) {
               if (err) throw err;
-              console.log(results);
               compiled.push(results);
             });
           }, 3000);
         });
 
         async.series(tasks, function(err, results) {
-          console.log("finished", compiled);
-          fs.writeFile('./data/chrome/foo.json', JSON.stringify(compiled), {encoding: 'utf8'}, function(err) {
+          // console.log("finished", compiled);
+          var resultsGrouped = _.groupBy(compiled, 'id');
+          var dataGrouped = _.groupBy(data, 'id');
+          var final = _.map(resultsGrouped, function(result, id) {
+            return _.extend(result[0], dataGrouped[id][0]);
+          });
+
+          console.log(final);
+
+          fs.writeFile('./data/chrome/.json', JSON.stringify(final), {encoding: 'utf8'}, function(err) {
             var msg;
             if (err) {
               msg = err;
