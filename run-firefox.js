@@ -5,42 +5,40 @@ var fs = require('fs');
 // var url = 'https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?id=achiogecogbafnpepmdkfdlmkkpkmfcj';
 var data = JSON.parse(fs.readFileSync('./data/chrome/chrome-partial.json', {encoding: 'utf8'}));
 
-data.length = 5;
+data.length = 1;
 
 function scrape(tab, callback) {
-  var category = tab.DOM.querySelector('.webstore-O-P-i');
-
-  var selectors = {
-    category: 'span.webstore-O-P-Oe-Hb .webstore-O-P-i',
-    users:    'span.webstore-O-P-Oe-Hb .webstore-O-P-if'
-    // updates:  '.webstore-qb-Vb-nd-bc-C-rh-sh'
-  };
-
-  var tasks = _.map(selectors, function(selector, name) {
-    return function(cb) {
-      tab.DOM.querySelector(selector, function(err, result) {
-        if (err) throw err;
-        if (name === 'category') {
-          cb(null, result.getAttribute('aria-label'));
-        }
-        else if (name === 'users') {
-          cb(null, result.getAttribute('title')); 
-        }
-        else if (name === 'updates') {
-          
+  async.parallel([
+    function(callback) {
+      tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-i', function(err, result) {
+        // if (err) throw err;
+        if (!result) {
+          callback(null, 'NORESULT')
         }
         else {
-          cb(null, null);
+          callback(null, result.getAttribute('aria-label'));  
         }
       });
-    } 
-  })
-
-  async.parallel(tasks, function(err, results) {
-    tab.Console.evaluateJS('document.querySelector(".webstore-qb-Vb-nd-bc-C-rh-sh").textContent', function(err, resp) {
-      _results = {
-        category: results[0],
-        users: results[1],
+    },
+    function(callback) {
+      tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-if', function(err, result) {
+        // if (err) throw err;
+        if (!result) {
+          callback(null, 'NORESULT')
+        }
+        else {
+          callback(null, result.getAttribute('title'));  
+        }
+      });
+    }
+  ], function(err, result) {
+    console.log(result);
+    var script = 'document.querySelector(".webstore-qb-Vb-nd-bc-C-rh-sh").textContent';
+    tab.Console.evaluateJS(script, function(err, resp) {
+      if (err) callback(err);
+      var _results = {
+        category: result[0],
+        users: result[1],
         updates: resp.result
       };
       callback(null, _results);
@@ -49,6 +47,22 @@ function scrape(tab, callback) {
 }
 
 var compiled = [];
+
+function notify(msg) {
+  var me = 'shlV6I4eGqpQ7PKUmBPuK4wvS3aVq2';
+  var app = 'awRtV1oncpNkss9pdBdmP6ALcoQgaP';
+  var push = require('pushover-notifications');
+
+  var p = new push( {
+      user: me,
+      token: app,
+      // onerror: function(error) {},
+      // update_sounds: true // update the list of sounds every day - will
+      // prevent app from exiting.
+  });
+
+  p.send(msg);
+}
 
 if (!module.parent) {  
   var FirefoxClient = require('firefox-client');
@@ -69,7 +83,7 @@ if (!module.parent) {
               console.log("navigated to", item.url);
               setTimeout(function() {
                 callback(null);
-              }, 6000);
+              }, 5000);
             });
           }
         });
@@ -87,11 +101,37 @@ if (!module.parent) {
         async.series(tasks, function(err, results) {
           console.log("finished", compiled);
           fs.writeFile('./data/chrome/foo.json', JSON.stringify(compiled), {encoding: 'utf8'}, function(err) {
-            if (err) throw err;
-            console.log("ALL DONE");
+            var msg;
+            if (err) {
+              msg = err;
+            }
+            else {
+              msg = 'Finished collecting: '+ compiled.length;
+            }
+
+            console.log("ALL DONE: "+msg);
+            end(msg);
           });
         })
       });
     });
+  });
+}
+
+function end(msg) {
+  async.series([
+    function(callback) {
+      notify({
+        message: msg,   // required
+        title: 'Finished Scrape',
+        sound: 'magic',
+        device: 'OnePlusOne',
+        priority: 1
+      });
+      callback(null);
+    },
+  ], function() {
+    client.disconnect();
+    process.exit();
   });
 }

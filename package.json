@@ -13,6 +13,7 @@
     "cheerio": "^0.18.0",
     "firefox-client": "^0.3.0",
     "phantom": "^0.7.2",
+    "pushover-notifications": "^0.2.2",
     "request": "^2.53.0",
     "to-csv": "0.0.3",
     "underscore": "^1.8.2"
