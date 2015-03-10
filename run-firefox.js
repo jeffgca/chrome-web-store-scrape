@@ -3,7 +3,7 @@ var _ = require('underscore');
 var fs = require('fs');
 var data = JSON.parse(fs.readFileSync('./data/chrome/chrome-partial.json', {encoding: 'utf8'}));
 
-data.length = 2;
+//data.length = 2;
 
 function scrape(tab, callback) {
   var id = tab.url.split('/').pop();
