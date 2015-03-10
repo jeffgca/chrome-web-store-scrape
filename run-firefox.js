@@ -3,14 +3,16 @@ var _ = require('underscore');
 var fs = require('fs');
 var data = JSON.parse(fs.readFileSync('./data/chrome/chrome-partial.json', {encoding: 'utf8'}));
 
-data.length = 1;
+data.length = 2;
 
 function scrape(tab, callback) {
   var id = tab.url.split('/').pop();
 
   async.parallel([
     function(callback) {
-      tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-i', function(err, result) {
+      // category
+      // tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-i', function(err, result) {
+      tab.DOM.querySelector('.webstore-O-P-i', function(err, result) {
         // if (err) throw err;
         if (!result) {
           callback(null, 'NORESULT')
@@ -21,7 +23,8 @@ function scrape(tab, callback) {
       });
     },
     function(callback) {
-      tab.DOM.querySelector('span.webstore-O-P-Oe-Hb .webstore-O-P-if', function(err, result) {
+      // # of users
+      tab.DOM.querySelector('.webstore-O-P-jf', function(err, result) {
         // if (err) throw err;
         if (!result) {
           callback(null, 'NORESULT')
@@ -32,10 +35,12 @@ function scrape(tab, callback) {
       });
     }
   ], function(err, result) {
-    console.log(result);
-    var script = 'document.querySelector(".webstore-qb-Vb-nd-bc-C-rh-sh").textContent';
+    // console.log(result);
+    // console.log("in scrape, after parallel");
+    var script = 'document.querySelector("span.webstore-Vb-nd-bc-C-uh:nth-child(5)").textContent';
     tab.Console.evaluateJS(script, function(err, resp) {
       if (err) callback(err);
+      // console.log(resp);
       var _results = {
         category: result[0],
         users: result[1],
@@ -46,8 +51,6 @@ function scrape(tab, callback) {
     });
   });
 }
-
-var compiled = [];
 
 function notify(msg) {
   var me = 'shlV6I4eGqpQ7PKUmBPuK4wvS3aVq2';
@@ -78,30 +81,25 @@ if (!module.parent) {
       var tab = tabs[0];
 
       tab.attach(function() {
-        var tasks = _.map(data, function(item) {
-          console.log(item);
+        var tasks = _.map(data, function(item, i) {
           return function(callback) {
+            console.log("[%d/%d]\t%s (%s)", (i+1), data.length, item.name, item.id);
             tab.navigateTo(item.url, function() {
-              console.log("navigated to", item.url);
+
               setTimeout(function() {
-                callback(null);
-              }, 5000);
+                // console.log("running scrape...");
+                scrape(tab, function(err, results) {
+                  // console.log("in scrape callback");
+                  if (err) throw err;
+                  callback(null, results);
+                });
+              }, 4000);
             });
           }
         });
 
-        tab.on('navigate', function(event) {
-          setTimeout(function() {
-            scrape(tab, function(err, results) {
-              if (err) throw err;
-              compiled.push(results);
-            });
-          }, 3000);
-        });
-
         async.series(tasks, function(err, results) {
-          // console.log("finished", compiled);
-          var resultsGrouped = _.groupBy(compiled, 'id');
+          var resultsGrouped = _.groupBy(results, 'id');
           var dataGrouped = _.groupBy(data, 'id');
           var final = _.map(resultsGrouped, function(result, id) {
             return _.extend(result[0], dataGrouped[id][0]);
@@ -109,13 +107,13 @@ if (!module.parent) {
 
           console.log(final);
 
-          fs.writeFile('./data/chrome/.json', JSON.stringify(final), {encoding: 'utf8'}, function(err) {
+          fs.writeFile('./data/chrome/complete.json', JSON.stringify(final), {encoding: 'utf8'}, function(err) {
             var msg;
             if (err) {
               msg = err;
             }
             else {
-              msg = 'Finished collecting: '+ compiled.length;
+              msg = 'Finished collecting: '+ results.length;
             }
 
             console.log("ALL DONE: "+msg);
